@@ -1,6 +1,6 @@
 import { Observation } from "src/services/inaturalist/Api";
 import "./ObservationDetail.css";
-import { imageUrl } from "src/services/inaturalist_open_data";
+import { imageUrl } from "src/utils/imageUrl";
 import Rectangle from "src/components/Rectangle";
 
 export default function ObservationDetail(obs: ObservationDetailProps) {

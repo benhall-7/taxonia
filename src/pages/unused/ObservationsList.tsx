@@ -5,7 +5,7 @@ import "./ObservationsList.css";
 export default function ObservationsList({
   observations,
 }: ObservationsListProps) {
-  console.log(observations[0]);
+  console.log(observations);
   return (
     <div className="observations-list">
       {observations
