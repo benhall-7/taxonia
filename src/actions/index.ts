@@ -1,20 +1,27 @@
-import { getObservationsList } from "src/actions/observations";
+import { getObservationsList } from "./observations";
+import { getPlacesAutocompleteList } from "./places";
+import { getTaxaAutocompleteList } from "./taxa";
+import { getUsersAutocompleteList } from "./users";
 
 const actionsList = {
   getObservationsList,
+  getPlacesAutocompleteList,
+  getTaxaAutocompleteList,
+  getUsersAutocompleteList,
 };
 
+type Entry<K, V> = { key: K; action: V };
+
 type WithKeys<T> = {
-  [K in keyof T]: { key: K; action: T[K] };
+  [K in keyof T]: Entry<K, T[K]>;
 };
 
 const actions = Object.entries(actionsList).reduce(
   (acc, [k, v]) => {
-    const key = k as keyof typeof actionsList;
-    acc[key] = { key, action: v };
+    acc[k] = { key: k, action: v };
     return acc;
   },
-  {} as WithKeys<typeof actionsList>
-);
+  {} as Record<string, Entry<unknown, unknown>>
+) as WithKeys<typeof actionsList>;
 
 export default actions;

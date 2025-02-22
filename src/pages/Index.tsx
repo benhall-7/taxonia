@@ -1,11 +1,10 @@
+import GeneralPage from "src/components/GeneralPage";
+import NewTestDialog from "./Index/NewTestDialog";
 
 export function Index() {
-  
-
   return (
-    <>
-      <div>Hello world!</div>
-      
-    </>
+    <GeneralPage>
+      <NewTestDialog />
+    </GeneralPage>
   );
 }
