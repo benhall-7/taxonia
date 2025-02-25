@@ -18,7 +18,8 @@ import { useQuery } from "@tanstack/react-query";
 import actions from "src/actions";
 // import { useLocation, useRoute, useRouter } from "wouter";
 import { useDebounce } from "use-debounce";
-import RadioSelect from "./NewTestDialog/RadioSelect";
+import RadioSelect from "../../components/RadioSelect";
+import { testRoute } from "src/routes/index/test";
 
 export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
   const [params, setParams] = useState<NewTestForm>(
@@ -40,10 +41,11 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
   const [placesQuery] = useDebounce(placesValue, 500);
 
   const validatedParams = useMemo(() => newTestValidate(params), [params]);
+  const navigate = testRoute.useNavigate();
 
   const handleClose = () => setOpen(false);
   const handleSubmit = () => {
-    console.log(validatedParams);
+    navigate({ to: testRoute.fullPath, search: validatedParams });
   };
 
   const taxaParams: Parameters<
@@ -110,7 +112,6 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
               setParams({ ...params, taxon: value ?? undefined })
             }
             loading={loadingTaxa}
-            clearOnBlur
             selectOnFocus
             filterOptions={(options) => options}
             renderInput={(params) => (
@@ -135,7 +136,7 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
                     alt={option.preferred_common_name}
                     width="48px"
                     height="48px"
-                    style={{ borderRadius: "2px" }}
+                    style={{ borderRadius: "8px" }}
                   />
                   <Box flex="1">
                     <Typography component="h5" noWrap textOverflow="ellipsis">
@@ -162,7 +163,6 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
               setParams({ ...params, place: value ?? undefined })
             }
             loading={loadingPlaces}
-            clearOnBlur
             selectOnFocus
             filterOptions={(options) => options}
             renderInput={(params) => (
@@ -180,26 +180,26 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
             Introduced status
           </FormLabel>
           <RadioSelect
-            options={["undefined", "true", "false"] as const}
-            value={params.introduced}
-            setValue={(value) => setParams({ ...params, introduced: value })}
-            names={["Any", "Introduced", "Native"]}
             radioGroupProps={{
               "aria-labelledby": "new-test-dialog-introduced",
             }}
+            options={["undefined", "true", "false"] as const}
+            names={["Any", "Introduced", "Native"]}
+            value={params.introduced}
+            setValue={(value) => setParams({ ...params, introduced: value })}
           />
 
           <FormLabel id="new-test-dialog-threatened">
             Threatened status
           </FormLabel>
           <RadioSelect
-            options={["undefined", "true", "false"] as const}
-            value={params.threatened}
-            setValue={(value) => setParams({ ...params, threatened: value })}
-            names={["Any", "Threatened", "Not threatened"]}
             radioGroupProps={{
               "aria-labelledby": "new-test-dialog-threatened",
             }}
+            options={["undefined", "true", "false"] as const}
+            names={["Any", "Threatened", "Not threatened"]}
+            value={params.threatened}
+            setValue={(value) => setParams({ ...params, threatened: value })}
           />
         </DialogContent>
         <DialogActions>

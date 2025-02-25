@@ -18,8 +18,6 @@ export type NewTestForm = {
   project?: Project;
 };
 
-export type NewTestPageProps = ReturnType<typeof newTestValidate>;
-
 export function newTestValidate(form: NewTestForm) {
   // const numQuestionsValid =
   //   form.numQuestions >= 1 &&
