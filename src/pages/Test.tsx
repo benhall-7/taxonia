@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-import taxonia from "src/images/taxonia.png";
 import { testRoute, TestSearch } from "src/routes/index/test";
 import actions from "src/actions";
 import TestMain from "./Test/TestMain";
@@ -21,33 +20,21 @@ export default function Test() {
     quality_grade: "research",
     captive: false,
     order_by: "random",
+    photos: true,
+    rank: "species",
   };
   const { data: observationsList, isLoading } = useQuery({
     queryKey: [actions.getObservationsList.key, taxaParams],
     queryFn: ({ signal }) =>
       actions.getObservationsList.action(taxaParams, { signal }),
-    staleTime: Infinity,
+    // refreshing shouldn't retrieve the same test
+    staleTime: 0,
   });
 
   return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar>
-          <img src={taxonia} width="24px" />
-          <Typography
-            variant="h2"
-            component="div"
-            sx={{ flexGrow: 1, marginLeft: "8px" }}
-          >
-            Test
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
-      <Box margin="20px">
-        {!observationsList && isLoading && "Loading..."}
-        {observationsList && <TestMain observations={observationsList} />}
-      </Box>
+    <Box margin="20px">
+      {!observationsList && isLoading && "Loading..."}
+      {observationsList && <TestMain observations={observationsList} />}
     </Box>
   );
 }
