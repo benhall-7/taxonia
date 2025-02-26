@@ -8,37 +8,36 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Observation } from "src/services/inaturalist/Api";
+import { TestAnswer } from "./types";
 
 export default function AnswerDialog({
   open,
   onClose,
-  guess,
+  answer,
   observation,
 }: AnswerDialogProps) {
   // closing is an animation, and we only want the state to update
   // once the modal opens again
-  const [currentGuess, setCurrentGuess] = useState(guess);
+  const [currentGuess, setCurrentGuess] = useState(answer);
   const [currentObservation, setCurrentObservation] = useState(observation);
 
   useEffect(() => {
     if (open) {
-      setCurrentGuess(guess);
+      setCurrentGuess(answer);
       setCurrentObservation(observation);
     }
-  }, [open, observation, guess]);
-
-  const accuracy = currentGuess === currentObservation.taxon?.name ? 1 : 0;
+  }, [open, observation, answer]);
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Solution</DialogTitle>
       <DialogContent>
-        <Typography>Guess: {currentGuess || "Skipped"}</Typography>
+        <Typography>Guess: {currentGuess.guess || "Skipped"}</Typography>
         <Typography>Actual: {currentObservation.taxon?.name}</Typography>
         <Typography>
           Common name: {currentObservation?.taxon?.preferred_common_name}
         </Typography>
-        <Typography>Accuracy: {accuracy}</Typography>
+        <Typography>Accuracy: {currentGuess.score}</Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Next</Button>
@@ -50,6 +49,6 @@ export default function AnswerDialog({
 type AnswerDialogProps = {
   open: boolean;
   onClose: () => void;
-  guess?: string;
+  answer: TestAnswer;
   observation: Observation;
 };

@@ -29,6 +29,9 @@ export default function Test() {
       actions.getObservationsList.action(taxaParams, { signal }),
     // refreshing shouldn't retrieve the same test
     staleTime: 0,
+    refetchOnReconnect() {
+      return "always";
+    },
   });
 
   return (

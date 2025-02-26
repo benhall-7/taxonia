@@ -9,27 +9,30 @@ import AnswerDialog from "./TestMain/AnswerDialog";
 import { homeRoute } from "src/routes/index/home";
 import ConfirmExitDialog from "./TestMain/ConfirmExitDialog";
 import TestResults from "./TestMain/TestResults";
+import { TestAnswer } from "./TestMain/types";
 
 export default function TestMain({ observations }: TestMainProps) {
   const [observationsStable] = useState(observations);
   const [question, setQuestion] = useState(0);
-  const [answers, setAnswers] = useState<Array<string | undefined>>([]);
+  const [answers, setAnswers] = useState<TestAnswer[]>([]);
 
-  const [currentGuess, setCurrentGuess] = useState<string | undefined>();
+  const [submittedAnswer, setSubmittedAnswer] = useState<TestAnswer>(
+    TestAnswer.default()
+  );
   const [showAnswerDialog, setShowAnswerDialog] = useState(false);
-
   const [showExitDialog, setShowExitDialog] = useState(false);
 
   const currentObservation = observationsStable.results[question];
 
   const submitAnswer = (input?: string) => {
-    setCurrentGuess(input);
+    const answer = TestAnswer.score(currentObservation, input);
+    setSubmittedAnswer(answer);
     setShowAnswerDialog(true);
   };
 
   const onAnswerDialogClose = () => {
-    setCurrentGuess(undefined);
-    setAnswers([...answers, currentGuess]);
+    setAnswers([...answers, submittedAnswer]);
+    setSubmittedAnswer(TestAnswer.default());
     setQuestion(question + 1);
     setShowAnswerDialog(false);
   };
@@ -84,14 +87,17 @@ export default function TestMain({ observations }: TestMainProps) {
           submitAnswer={submitAnswer}
         />
       ) : (
-        <TestResults />
+        <TestResults
+          observations={observationsStable.results}
+          answers={answers}
+        />
       )}
 
       {currentObservation && (
         <AnswerDialog
           open={showAnswerDialog}
           onClose={onAnswerDialogClose}
-          guess={currentGuess}
+          answer={submittedAnswer}
           observation={currentObservation}
         />
       )}

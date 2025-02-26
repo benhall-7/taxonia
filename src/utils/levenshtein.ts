@@ -32,3 +32,13 @@ export function levenshtein(a: string, b: string): number {
   }
   return matrix[bn][an];
 }
+
+/**
+ * Levenshtein distance normalized between 0 and 1.
+ * 0 indicates that the strings are identical.
+ * @param a The first string
+ * @param b The second string
+ */
+export function normalizedLevenshtein(a: string, b: string) {
+  return levenshtein(a, b) / Math.max(a.length, b.length, 1);
+}
