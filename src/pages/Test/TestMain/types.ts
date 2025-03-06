@@ -23,6 +23,15 @@ export const TestAnswer = {
       score: lerped,
     };
   },
+  scoreRating(score: number) {
+    if (score < 0.5) {
+      return "bad"
+    }
+    if (score < 0.9) {
+      return "ok"
+    }
+    return "good"
+  },
   default(): TestAnswer {
     return {
       guess: undefined,

@@ -21,7 +21,7 @@ import { useDebounce } from "use-debounce";
 import RadioSelect from "../../components/RadioSelect";
 import { testRoute } from "src/routes/index/test";
 
-export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
+export default function NewTestDialog({ initialValues, open, setOpen }: NewTestDialogProps) {
   const [params, setParams] = useState<NewTestForm>(
     initialValues || {
       questionCount: 15,
@@ -29,13 +29,15 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
       threatened: "undefined",
     }
   );
-  const [open, setOpen] = useState(false);
 
   // intermediate form state (e.g. autocomplete inputs)
   const [taxaValue, setTaxaValue] = useState(params?.taxon?.name || "");
   const [placesValue, setPlacesValue] = useState(
     params?.place?.display_name || ""
   );
+
+  console.log(taxaValue);
+  console.log(placesValue);
 
   const [taxaQuery] = useDebounce(taxaValue, 500);
   const [placesQuery] = useDebounce(placesValue, 500);
@@ -78,9 +80,6 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
 
   return (
     <>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
-        New Test
-      </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>Start a new test</DialogTitle>
         <DialogContent dividers>
@@ -108,6 +107,7 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
             autoHighlight
             options={taxaAutocompleteList?.results || []}
             getOptionLabel={(place) => place.name!}
+            value={params.taxon}
             onChange={(_e, value) =>
               setParams({ ...params, taxon: value ?? undefined })
             }
@@ -159,6 +159,7 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
             autoHighlight
             options={placesAutocompleteList?.results || []}
             getOptionLabel={(place) => place.display_name!}
+            value={params.place}
             onChange={(_e, value) =>
               setParams({ ...params, place: value ?? undefined })
             }
@@ -213,4 +214,6 @@ export default function NewTestDialog({ initialValues }: NewTestDialogProps) {
 
 type NewTestDialogProps = {
   initialValues?: NewTestForm;
+  open: boolean;
+  setOpen: (value: boolean) => void;
 };

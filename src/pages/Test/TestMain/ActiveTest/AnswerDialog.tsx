@@ -37,7 +37,7 @@ export default function AnswerDialog({
         <Typography>
           Common name: {currentObservation?.taxon?.preferred_common_name}
         </Typography>
-        <Typography>Accuracy: {currentGuess.score}</Typography>
+        <Typography>Accuracy: {currentGuess.score.toFixed(3)}</Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Next</Button>
