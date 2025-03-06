@@ -7,8 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+
 import { Observation } from "src/services/inaturalist/Api";
-import { TestAnswer } from "./types";
+
+import { TestAnswer } from "../types";
 
 export default function AnswerDialog({
   open,

@@ -8,8 +8,8 @@ import ConfirmExitDialog from "./ActiveTest/ConfirmExitDialog";
 import AnswerDialog from "./ActiveTest/AnswerDialog";
 
 import { Observation } from "src/services/inaturalist/Api";
-import { homeRoute } from "src/routes/index/home";
 import taxonia from "src/images/taxonia.png";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function ActiveTest({
   currentObservation,
@@ -33,11 +33,11 @@ export default function ActiveTest({
     commitAnswer(submittedAnswer);
     setSubmittedAnswer(TestAnswer.default());
     setShowAnswerDialog(false);
-  };
+  }; 
 
-  const navigate = homeRoute.useNavigate();
+  const navigate = useNavigate();
   const onExit = () => {
-    navigate({ to: homeRoute.fullPath });
+    navigate({ to: "/" });
   };
 
   const onClickExitButton = () => {

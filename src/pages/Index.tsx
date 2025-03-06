@@ -67,19 +67,17 @@ export default function Index() {
           </Button>
         </Box>
 
-        <Box margin="20px 0">
+        <Box minHeight="120px">
           <Typography variant="h3">Recent tests</Typography>
           {recentTests.length === 0 && (
-            <Box padding="40px 0">
-              <Typography
-                variant="body1"
-                color="textSecondary"
-                textAlign="center"
-              >
-                Looks like there's no history yet. Try starting a test and
-                saving your results, then checking back later.
-              </Typography>
-            </Box>
+            <Typography
+              variant="body1"
+              color="textSecondary"
+              textAlign="center"
+            >
+              Looks like there's no history yet. Try starting a test and saving
+              your results, then checking back later.
+            </Typography>
           )}
         </Box>
 

@@ -8,3 +8,10 @@ const routeTree = rootRoute.addChildren([homeRoute, testRoute]);
 const router = createRouter({ routeTree });
 
 export default router;
+
+// Register things for typesafety
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}

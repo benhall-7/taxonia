@@ -19,7 +19,7 @@ import actions from "src/actions";
 // import { useLocation, useRoute, useRouter } from "wouter";
 import { useDebounce } from "use-debounce";
 import RadioSelect from "../../components/RadioSelect";
-import { testRoute } from "src/routes/index/test";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function NewTestDialog({ initialValues, open, setOpen }: NewTestDialogProps) {
   const [params, setParams] = useState<NewTestForm>(
@@ -43,11 +43,11 @@ export default function NewTestDialog({ initialValues, open, setOpen }: NewTestD
   const [placesQuery] = useDebounce(placesValue, 500);
 
   const validatedParams = useMemo(() => newTestValidate(params), [params]);
-  const navigate = testRoute.useNavigate();
+  const navigate = useNavigate();
 
   const handleClose = () => setOpen(false);
   const handleSubmit = () => {
-    navigate({ to: testRoute.fullPath, search: validatedParams });
+    navigate({ to: "/test", search: validatedParams });
   };
 
   const taxaParams: Parameters<

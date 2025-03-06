@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   AppBar,
   Box,
@@ -8,13 +9,14 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { CloseOutlined } from "@mui/icons-material";
+
 import { Observation } from "src/services/inaturalist/Api";
+import taxonia from "src/images/taxonia.png";
+
 import { TestAnswer } from "./types";
 import ResultRow from "./TestResults/ResultRow";
-import { useState } from "react";
-import { CloseOutlined } from "@mui/icons-material";
-import { homeRoute } from "src/routes/index/home";
-import taxonia from "src/images/taxonia.png";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function FinishedTest({
   observations,
@@ -26,9 +28,9 @@ export default function FinishedTest({
   const averageScore =
     answers.reduce((sum, answer) => sum + answer.score, 0) / answers.length;
 
-  const navigate = homeRoute.useNavigate();
+  const navigate = useNavigate();
   const onExit = () => {
-    navigate({ to: homeRoute.fullPath });
+    navigate({ to: "/" });
   };
 
   return (

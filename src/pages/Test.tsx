@@ -1,19 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { Box, CircularProgress } from "@mui/material";
 
-import { testRoute, TestSearch } from "src/routes/index/test";
 import actions from "src/actions";
 import TestMain from "./Test/TestMain";
 import { useState } from "react";
+import { useSearch } from "@tanstack/react-router";
 
 export default function Test() {
   // use timestamp to control react-query caching nonsense
   const [testId] = useState(new Date());
 
-  // CONCERN: it's odd that I have to specify the type here.
-  // tanstack-router also includes parent component search params,
-  // but I have to & the types together to use them
-  const search: TestSearch = testRoute.useSearch();
+  const search = useSearch({ from: "/test" });
 
   const taxaParams: Parameters<typeof actions.getObservationsList.action>[0] = {
     rank: "species",
