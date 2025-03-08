@@ -24,7 +24,7 @@ export const TestAnswer = {
     };
   },
   scoreRating(score: number) {
-    if (score < 0.5) {
+    if (score < 0.75) {
       return "bad"
     }
     if (score < 0.9) {

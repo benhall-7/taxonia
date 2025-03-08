@@ -1,4 +1,4 @@
-import taxonia from "src/images/taxonia.png";
+import taxonia from "src/images/taxonia2.png";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -7,7 +7,7 @@ export default function GeneralPage({ children }: Props) {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <img src={taxonia} width="24px" />
+          <img src={taxonia} width="64px" />
           <Typography variant="h2" component="div" sx={{ flexGrow: 1, marginLeft: "8px" }}>
             Taxonia
           </Typography>

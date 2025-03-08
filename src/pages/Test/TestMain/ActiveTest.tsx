@@ -8,7 +8,7 @@ import ConfirmExitDialog from "./ActiveTest/ConfirmExitDialog";
 import AnswerDialog from "./ActiveTest/AnswerDialog";
 
 import { Observation } from "src/services/inaturalist/Api";
-import taxonia from "src/images/taxonia.png";
+import taxonia from "src/images/taxonia2.png";
 import { useNavigate } from "@tanstack/react-router";
 
 export default function ActiveTest({
@@ -33,7 +33,7 @@ export default function ActiveTest({
     commitAnswer(submittedAnswer);
     setSubmittedAnswer(TestAnswer.default());
     setShowAnswerDialog(false);
-  }; 
+  };
 
   const navigate = useNavigate();
   const onExit = () => {
@@ -58,9 +58,9 @@ export default function ActiveTest({
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ padding: "8px" }}>
         <Toolbar>
-          <img src={taxonia} width="24px" />
+          <img src={taxonia} width="64px" />
           <Typography
             variant="subtitle1"
             component="div"

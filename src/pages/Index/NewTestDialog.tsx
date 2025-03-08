@@ -36,9 +36,6 @@ export default function NewTestDialog({ initialValues, open, setOpen }: NewTestD
     params?.place?.display_name || ""
   );
 
-  console.log(taxaValue);
-  console.log(placesValue);
-
   const [taxaQuery] = useDebounce(taxaValue, 500);
   const [placesQuery] = useDebounce(placesValue, 500);
 

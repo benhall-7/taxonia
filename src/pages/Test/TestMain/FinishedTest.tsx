@@ -12,7 +12,7 @@ import {
 import { CloseOutlined } from "@mui/icons-material";
 
 import { Observation } from "src/services/inaturalist/Api";
-import taxonia from "src/images/taxonia.png";
+import taxonia from "src/images/taxonia2.png";
 
 import { TestAnswer } from "./types";
 import ResultRow from "./TestResults/ResultRow";
@@ -37,7 +37,7 @@ export default function FinishedTest({
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <img src={taxonia} width="24px" />
+          <img src={taxonia} width="64px" />
           <Stack direction="column" flex="1 0 0">
             <Typography
               variant="h4"

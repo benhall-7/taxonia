@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Observation, Photo } from "src/services/inaturalist/Api";
+import { Observation } from "src/services/inaturalist/Api";
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { imageUrl } from "src/utils/imageUrl";
+import ImageModal from "src/components/ImageModal";
 
 export default function TestQuestion({
   observation,
@@ -20,13 +21,12 @@ export default function TestQuestion({
   const [guessError, setGuessError] = useState<boolean>(false);
   const [whichPhoto, setWhichPhoto] = useState(0);
 
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [imageModalSrc, setImageModalSrc] = useState<string>();
+
   const indexedPhoto = observation.photos?.[whichPhoto];
 
-  const getSrc = (photo?: Photo) => {
-    const originalUrl = photo?.url;
-    return originalUrl && imageUrl(originalUrl, "medium");
-  };
-  const photoSrc = getSrc(indexedPhoto);
+  const photoSrc = indexedPhoto?.url && imageUrl(indexedPhoto.url, "medium");
 
   const numPhotos = observation.photos?.length ?? 0;
 
@@ -35,7 +35,8 @@ export default function TestQuestion({
       return;
     }
     const nextIndex = (whichPhoto + 1) % numPhotos;
-    const nextSrc = getSrc(observation.photos?.[nextIndex]);
+    const next = observation.photos?.[nextIndex];
+    const nextSrc = next?.url && imageUrl(next.url, "medium");
     if (nextSrc) {
       new Image().src = nextSrc;
     }
@@ -62,6 +63,13 @@ export default function TestQuestion({
     }
   };
 
+  const imageClick = () => {
+    const originalSrc =
+      indexedPhoto?.url && imageUrl(indexedPhoto.url, "original");
+    setImageModalSrc(originalSrc);
+    setImageModalOpen(true);
+  };
+
   return (
     <Box maxWidth="800px" margin="auto">
       <Stack
@@ -79,8 +87,10 @@ export default function TestQuestion({
               minHeight: "100%",
               maxWidth: "100%",
               objectFit: "contain",
+              cursor: "pointer",
             }}
             onLoad={preloadNextImg}
+            onClick={imageClick}
           />
         </Box>
         {numPhotos > 1 && (
@@ -130,6 +140,13 @@ export default function TestQuestion({
           </Button>
         </ButtonGroup>
       </Stack>
+
+      {/* Modals */}
+      <ImageModal
+        open={imageModalOpen}
+        onClose={() => setImageModalOpen(false)}
+        src={imageModalSrc}
+      />
     </Box>
   );
 }

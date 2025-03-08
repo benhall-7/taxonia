@@ -23,6 +23,7 @@ export default function Test() {
     captive: false,
     order_by: "random",
     photos: true,
+    ttl: "10",
   };
   const { data: observationsList, isLoading } = useQuery({
     queryKey: [actions.getObservationsList.key, taxaParams, testId],
