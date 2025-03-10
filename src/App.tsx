@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import "./App.css";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import routes from "./routes/index";
 import { RouterProvider } from "@tanstack/react-router";

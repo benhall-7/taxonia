@@ -1,6 +1,12 @@
 import taxonia from "src/images/taxonia2.png";
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import {
+  AppBar,
+  Box,
+  // IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+// import MenuIcon from "@mui/icons-material/Menu";
 
 export default function GeneralPage({ children }: Props) {
   return (
@@ -8,10 +14,14 @@ export default function GeneralPage({ children }: Props) {
       <AppBar position="static">
         <Toolbar>
           <img src={taxonia} width="64px" />
-          <Typography variant="h2" component="div" sx={{ flexGrow: 1, marginLeft: "8px" }}>
+          <Typography
+            variant="h2"
+            component="div"
+            sx={{ flexGrow: 1, marginLeft: "8px" }}
+          >
             Taxonia
           </Typography>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -19,7 +29,7 @@ export default function GeneralPage({ children }: Props) {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
 

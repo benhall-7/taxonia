@@ -50,8 +50,8 @@ export default function Index() {
   const [newTestModalOpen, setNewTestModalOpen] = useState(false);
   const [newTestModalProps, setNewTestModalProps] = useState<NewTestForm>();
 
-  // TODO: implement this API endpoint
-  const recentTests = [];
+  // TODO: implement an API for a user's 12(?) most recent tests
+  // const recentTests = [];
 
   const openNewTestModal = (initialValues?: NewTestForm) => {
     setNewTestModalProps(initialValues);
@@ -67,7 +67,7 @@ export default function Index() {
           </Button>
         </Box>
 
-        <Box minHeight="120px">
+        {/* <Box minHeight="120px">
           <Typography variant="h3">Recent tests</Typography>
           {recentTests.length === 0 && (
             <Typography
@@ -79,7 +79,7 @@ export default function Index() {
               your results, then checking back later.
             </Typography>
           )}
-        </Box>
+        </Box> */}
 
         <Box>
           <Typography variant="h3">Example tests</Typography>
