@@ -129,6 +129,7 @@ export default function TestQuestion({
           placeholder="Homo sapiens"
           size="medium"
           margin="normal"
+          autoFocus
           error={guessError}
         />
         <ButtonGroup variant="text">
