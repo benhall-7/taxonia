@@ -37,7 +37,8 @@ jobs:
           node-version-file: package.json
           check-latest: false
 
-      - run: npm lint
+      - run: npm ci
+      - run: npm run lint
       # TODO: add tests
       # - run: npm test
       - run: npm run build
