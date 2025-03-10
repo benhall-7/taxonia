@@ -41,8 +41,11 @@ jobs:
       # TODO: add tests
       # - run: npm test
       - run: npm run build
+
       # GitHub Pages specific 404 redirect to make URL sharing work
       - run: cp ./dist/index.html ./dist/404.html
+      # DNS record
+      - run: cp ./CNAME ./dist/CNAME
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
