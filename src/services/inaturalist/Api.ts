@@ -6672,8 +6672,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pngDetail: (
       placeId: number,
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Set the `Cache-Control` HTTP header with this value as `max-age`, in
@@ -7632,8 +7632,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     pngDetail: (
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
@@ -8050,8 +8050,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     gridJsonDetail: (
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
@@ -8470,8 +8470,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     pngDetail: (
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
@@ -8888,8 +8888,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     gridJsonDetail: (
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
@@ -9308,8 +9308,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     pngDetail: (
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
@@ -9726,8 +9726,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     gridJsonDetail: (
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
@@ -10146,8 +10146,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     pngDetail: (
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
@@ -10564,8 +10564,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     gridJsonDetail: (
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
@@ -10985,8 +10985,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pngDetail: (
       taxonId: number,
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Set the `Cache-Control` HTTP header with this value as `max-age`, in
@@ -11016,8 +11016,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pngDetail: (
       taxonId: number,
       zoom: number,
-      x: number,
-      y: number,
+      _x: number,
+      _y: number,
       query?: {
         /**
          * Primary color to use in tile creation. Accepts common colors by string
