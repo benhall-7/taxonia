@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   AppBar,
   Box,
+  ButtonGroup,
   IconButton,
   Stack,
   ToggleButton,
@@ -9,7 +10,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { CloseOutlined } from "@mui/icons-material";
+import { CloseOutlined, RefreshOutlined } from "@mui/icons-material";
 
 import { Observation } from "src/services/inaturalist/Api";
 import taxonia from "src/images/taxonia2.png";
@@ -31,6 +32,9 @@ export default function FinishedTest({
   const navigate = useNavigate();
   const onExit = () => {
     navigate({ to: "/" });
+  };
+  const refresh = () => {
+    window.location.reload();
   };
 
   return (
@@ -56,9 +60,14 @@ export default function FinishedTest({
               Accuracy: {averageScore.toFixed(3)}
             </Typography>
           </Stack>
-          <IconButton aria-label="exit" onClick={() => onExit()}>
-            <CloseOutlined />
-          </IconButton>
+          <ButtonGroup sx={{display: "flex", gap: "8px"}}>
+            <IconButton aria-label="refresh" onClick={() => refresh()}>
+              <RefreshOutlined />
+            </IconButton>
+            <IconButton aria-label="exit" onClick={() => onExit()}>
+              <CloseOutlined />
+            </IconButton>
+          </ButtonGroup>
         </Toolbar>
       </AppBar>
 

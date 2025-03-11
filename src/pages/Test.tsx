@@ -23,6 +23,9 @@ export default function Test() {
     captive: false,
     order_by: "random",
     photos: true,
+    // The browser will cache the response for 10 seconds. This
+    // prevents me from accidentally overburdening the API and is
+    // short enough to prevent refresh-to-retry exploits
     ttl: "10",
   };
   const { data: observationsList, isLoading } = useQuery({
