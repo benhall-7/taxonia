@@ -3,7 +3,7 @@ import { createRoute } from "@tanstack/react-router";
 import Test from "src/pages/Test";
 import { rootRoute } from "src/routes";
 
-export const testSearchSchema = z.object({
+const testSearchSchema = z.object({
   questionCount: z.number().catch(15),
   taxon: z.number().optional().catch(undefined),
   place: z.number().optional().catch(undefined),
@@ -11,11 +11,8 @@ export const testSearchSchema = z.object({
   introduced: z.boolean().optional().catch(undefined),
   threatened: z.boolean().optional().catch(undefined),
   project: z.number().optional().catch(undefined),
-  // TODO: filter out dead animals from API response
-  // exclude_dead: z.boolean().optional().catch(undefined),
+  excludeDead: z.boolean().optional().catch(undefined),
 });
-
-export type TestSearch = z.infer<typeof testSearchSchema>;
 
 export const testRoute = createRoute({
   getParentRoute: () => rootRoute,

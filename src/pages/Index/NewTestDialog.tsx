@@ -9,6 +9,7 @@ import {
   FormLabel,
   Slider,
   Stack,
+  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -21,7 +22,11 @@ import { useDebounce } from "use-debounce";
 import RadioSelect from "../../components/RadioSelect";
 import { useNavigate } from "@tanstack/react-router";
 
-export default function NewTestDialog({ initialValues, open, setOpen }: NewTestDialogProps) {
+export default function NewTestDialog({
+  initialValues,
+  open,
+  setOpen,
+}: NewTestDialogProps) {
   const [params, setParams] = useState<NewTestForm>(
     initialValues || {
       questionCount: 15,
@@ -198,6 +203,15 @@ export default function NewTestDialog({ initialValues, open, setOpen }: NewTestD
             names={["Any", "Threatened", "Not threatened"]}
             value={params.threatened}
             setValue={(value) => setParams({ ...params, threatened: value })}
+          />
+
+          <FormLabel id="new-test-exclude-dead">
+            Exclude dead observations
+          </FormLabel>
+          <Switch
+            checked={params.excludeDead}
+            onChange={(_, excludeDead) => setParams({ ...params, excludeDead })}
+            inputProps={{ "aria-describedby": "new-test-exclude-dead" }}
           />
         </DialogContent>
         <DialogActions>

@@ -16,6 +16,7 @@ export type NewTestForm = {
   threatened: "true" | "false" | "undefined";
   // TODO: implement this later
   project?: Project;
+  excludeDead?: boolean;
 };
 
 export function newTestValidate(form: NewTestForm) {
@@ -56,6 +57,7 @@ export function newTestValidate(form: NewTestForm) {
     threatened:
       form.threatened === "undefined" ? undefined : form.threatened === "true",
     project: form.project?.id,
+    excludeDead: form.excludeDead,
     // },
   };
 }
