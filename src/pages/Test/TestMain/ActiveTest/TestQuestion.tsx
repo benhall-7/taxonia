@@ -136,7 +136,11 @@ export default function TestQuestion({
           <Button disabled={guess.length === 0} onClick={handleSubmit}>
             Submit
           </Button>
-          <Button color="warning" onClick={() => submitAnswer()}>
+          <Button
+            disabled={guess.length > 0}
+            color="warning"
+            onClick={() => submitAnswer()}
+          >
             Skip
           </Button>
         </ButtonGroup>

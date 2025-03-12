@@ -11,6 +11,8 @@ export const testSearchSchema = z.object({
   introduced: z.boolean().optional().catch(undefined),
   threatened: z.boolean().optional().catch(undefined),
   project: z.number().optional().catch(undefined),
+  // TODO: filter out dead animals from API response
+  // exclude_dead: z.boolean().optional().catch(undefined),
 });
 
 export type TestSearch = z.infer<typeof testSearchSchema>;
