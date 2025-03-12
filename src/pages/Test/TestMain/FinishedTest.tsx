@@ -16,7 +16,7 @@ import { Observation } from "src/services/inaturalist/Api";
 import taxonia from "src/images/taxonia2.png";
 
 import { TestAnswer } from "./types";
-import ResultRow from "./TestResults/ResultRow";
+import ResultRow from "./FinishedTest/ResultRow";
 import { useNavigate } from "@tanstack/react-router";
 
 export default function FinishedTest({
