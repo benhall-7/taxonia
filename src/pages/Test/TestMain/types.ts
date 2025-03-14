@@ -18,8 +18,8 @@ export const TestAnswer = {
 
     const range = Array.from({ length: count }, (_, index) => index);
     const scores = range.map((index) => {
-      const wordA = wordsA[index];
-      const wordB = wordsB[index];
+      const wordA = wordsA[index] || "";
+      const wordB = wordsB[index] || "";
 
       const unlerped = 1 - normalizedLevenshtein(wordA, wordB);
       const lerped =
