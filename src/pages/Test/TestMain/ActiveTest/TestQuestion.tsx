@@ -132,11 +132,16 @@ export default function TestQuestion({
           autoFocus
           error={guessError}
         />
-        <ButtonGroup variant="text">
-          <Button disabled={guess.length === 0} onClick={handleSubmit}>
+        <ButtonGroup>
+          <Button
+            variant="contained"
+            disabled={guess.length === 0}
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
           <Button
+            variant="contained"
             disabled={guess.length > 0}
             color="warning"
             onClick={() => submitAnswer()}

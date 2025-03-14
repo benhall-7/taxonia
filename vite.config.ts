@@ -15,8 +15,11 @@ export default defineConfig({
         // default value
         /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/,
         // my allowlist
-        /https?:\/\/api\.inaturalist\.org/
+        /https?:\/\/api\.inaturalist\.org/,
       ],
     },
+  },
+  define: {
+    APP_VERSION: JSON.stringify(process.env.npm_package_version),
   },
 });
