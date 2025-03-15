@@ -13,10 +13,10 @@ import {
 import { imageUrl } from "src/utils/imageUrl";
 import ImageModal from "src/components/ImageModal";
 
-export default function TestQuestion({
+export default function QuizQuestion({
   observation,
   submitAnswer,
-}: TestQuestionProps) {
+}: QuizQuestionProps) {
   const [guess, setGuess] = useState("");
   const [guessError, setGuessError] = useState<boolean>(false);
   const [whichPhoto, setWhichPhoto] = useState(0);
@@ -121,9 +121,9 @@ export default function TestQuestion({
           </Typography>
         )}
 
-        <FormLabel id="species-test-guess-input">Species name</FormLabel>
+        <FormLabel id="species-quiz-guess-input">Species name</FormLabel>
         <TextField
-          aria-describedby="species-test-guess-input"
+          aria-describedby="species-quiz-guess-input"
           value={guess}
           onChange={(e) => setGuess(e.target.value)}
           placeholder="Homo sapiens"
@@ -161,7 +161,7 @@ export default function TestQuestion({
   );
 }
 
-type TestQuestionProps = {
+type QuizQuestionProps = {
   observation: Observation;
   submitAnswer: (input?: string) => void;
 };

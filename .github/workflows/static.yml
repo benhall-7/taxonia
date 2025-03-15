@@ -39,8 +39,7 @@ jobs:
 
       - run: npm ci
       - run: npm run lint
-      # TODO: add tests
-      # - run: npm test
+      - run: npm test
       - run: npm run build
 
       # GitHub Pages specific 404 redirect to make URL sharing work

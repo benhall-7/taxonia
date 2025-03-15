@@ -10,12 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 import { Observation } from "src/services/inaturalist/Api";
-import { TestAnswer } from "../types";
+import { QuizAnswer } from "../types";
 import { imageUrl } from "src/utils/imageUrl";
 import { LinkOutlined } from "@mui/icons-material";
 
 export default function ResultRow({ observation, answer }: ResultRowProps) {
-  const rating = TestAnswer.scoreRating(answer.score);
+  const rating = QuizAnswer.scoreRating(answer.score);
   const alertColors: Record<typeof rating, AlertColor> = {
     bad: "error",
     ok: "warning",
@@ -92,5 +92,5 @@ export default function ResultRow({ observation, answer }: ResultRowProps) {
 
 type ResultRowProps = {
   observation: Observation;
-  answer: TestAnswer;
+  answer: QuizAnswer;
 };

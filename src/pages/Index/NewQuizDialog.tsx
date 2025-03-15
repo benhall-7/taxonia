@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useMemo, useState } from "react";
-import { NewTestForm, newTestValidate } from "./types";
+import { NewQuizForm, newQuizValidate } from "./types";
 import { useQuery } from "@tanstack/react-query";
 import actions from "src/actions";
 // import { useLocation, useRoute, useRouter } from "wouter";
@@ -22,12 +22,12 @@ import { useDebounce } from "use-debounce";
 import RadioSelect from "../../components/RadioSelect";
 import { useNavigate } from "@tanstack/react-router";
 
-export default function NewTestDialog({
+export default function NewQuizDialog({
   initialValues,
   open,
   setOpen,
-}: NewTestDialogProps) {
-  const [params, setParams] = useState<NewTestForm>(
+}: NewQuizDialogProps) {
+  const [params, setParams] = useState<NewQuizForm>(
     initialValues || {
       questionCount: 15,
       introduced: "undefined",
@@ -44,12 +44,12 @@ export default function NewTestDialog({
   const [taxaQuery] = useDebounce(taxaValue, 500);
   const [placesQuery] = useDebounce(placesValue, 500);
 
-  const validatedParams = useMemo(() => newTestValidate(params), [params]);
+  const validatedParams = useMemo(() => newQuizValidate(params), [params]);
   const navigate = useNavigate();
 
   const handleClose = () => setOpen(false);
   const handleSubmit = () => {
-    navigate({ to: "/test", search: validatedParams });
+    navigate({ to: "/quiz", search: validatedParams });
   };
 
   const taxaParams: Parameters<
@@ -83,15 +83,15 @@ export default function NewTestDialog({
   return (
     <>
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <DialogTitle>Start a new test</DialogTitle>
+        <DialogTitle>Start a new quiz</DialogTitle>
         <DialogContent dividers>
-          <FormLabel id="new-test-dialog-question-count">
+          <FormLabel id="new-quiz-dialog-question-count">
             Number of questions
           </FormLabel>
           <Stack direction="row" alignItems="center">
             <Typography width="48px">{params.questionCount}</Typography>
             <Slider
-              aria-labelledby="new-test-dialog-question-count"
+              aria-labelledby="new-quiz-dialog-question-count"
               min={5}
               max={50}
               step={5}
@@ -179,12 +179,12 @@ export default function NewTestDialog({
             )}
           />
 
-          <FormLabel id="new-test-dialog-introduced">
+          <FormLabel id="new-quiz-dialog-introduced">
             Introduced status
           </FormLabel>
           <RadioSelect
             radioGroupProps={{
-              "aria-labelledby": "new-test-dialog-introduced",
+              "aria-labelledby": "new-quiz-dialog-introduced",
             }}
             options={["undefined", "true", "false"] as const}
             names={["Any", "Introduced", "Native"]}
@@ -192,12 +192,12 @@ export default function NewTestDialog({
             setValue={(value) => setParams({ ...params, introduced: value })}
           />
 
-          <FormLabel id="new-test-dialog-threatened">
+          <FormLabel id="new-quiz-dialog-threatened">
             Threatened status
           </FormLabel>
           <RadioSelect
             radioGroupProps={{
-              "aria-labelledby": "new-test-dialog-threatened",
+              "aria-labelledby": "new-quiz-dialog-threatened",
             }}
             options={["undefined", "true", "false"] as const}
             names={["Any", "Threatened", "Not threatened"]}
@@ -205,13 +205,13 @@ export default function NewTestDialog({
             setValue={(value) => setParams({ ...params, threatened: value })}
           />
 
-          <FormLabel id="new-test-exclude-dead">
+          <FormLabel id="new-quiz-exclude-dead">
             Exclude dead observations
           </FormLabel>
           <Switch
             checked={params.excludeDead}
             onChange={(_, excludeDead) => setParams({ ...params, excludeDead })}
-            inputProps={{ "aria-describedby": "new-test-exclude-dead" }}
+            inputProps={{ "aria-describedby": "new-quiz-exclude-dead" }}
           />
         </DialogContent>
         <DialogActions>
@@ -223,8 +223,8 @@ export default function NewTestDialog({
   );
 }
 
-type NewTestDialogProps = {
-  initialValues?: NewTestForm;
+type NewQuizDialogProps = {
+  initialValues?: NewQuizForm;
   open: boolean;
   setOpen: (value: boolean) => void;
 };

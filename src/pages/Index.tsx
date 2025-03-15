@@ -1,5 +1,5 @@
 import GeneralPage from "src/components/GeneralPage";
-import NewTestDialog from "./Index/NewTestDialog";
+import NewQuizDialog from "./Index/NewQuizDialog";
 import { useState } from "react";
 import {
   Box,
@@ -11,9 +11,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { NewTestForm } from "./Index/types";
+import { NewQuizForm } from "./Index/types";
 
-const TEST_PRESETS = {
+const QUIZ_PRESETS = {
   birds: {
     questionCount: 15,
     threatened: "undefined",
@@ -35,9 +35,9 @@ const TEST_PRESETS = {
     taxon: { id: 47217, name: "Orchidaceae" },
     place: { id: 42, display_name: "Pennsylvania" },
   },
-} satisfies Record<string, NewTestForm>;
+} satisfies Record<string, NewQuizForm>;
 
-const TEST_PRESET_IMAGES = {
+const QUIZ_PRESET_IMAGES = {
   birds:
     "https://inaturalist-open-data.s3.amazonaws.com/photos/395125966/medium.jpg",
   mammals:
@@ -47,42 +47,42 @@ const TEST_PRESET_IMAGES = {
 };
 
 export default function Index() {
-  const [newTestModalOpen, setNewTestModalOpen] = useState(false);
-  const [newTestModalProps, setNewTestModalProps] = useState<NewTestForm>();
+  const [newQuizModalOpen, setNewQuizModalOpen] = useState(false);
+  const [newQuizModalProps, setNewQuizModalProps] = useState<NewQuizForm>();
 
-  // TODO: implement an API for a user's 12(?) most recent tests
-  // const recentTests = [];
+  // TODO: implement an API for a user's 12(?) most recent quizzes
+  // const recentQuizzes = [];
 
-  const openNewTestModal = (initialValues?: NewTestForm) => {
-    setNewTestModalProps(initialValues);
-    setNewTestModalOpen(true);
+  const openNewQuizModal = (initialValues?: NewQuizForm) => {
+    setNewQuizModalProps(initialValues);
+    setNewQuizModalOpen(true);
   };
 
   return (
     <GeneralPage>
       <Stack direction="column" spacing="20px">
         <Box textAlign="center">
-          <Button variant="outlined" onClick={() => openNewTestModal()}>
-            + New Test
+          <Button variant="outlined" onClick={() => openNewQuizModal()}>
+            + New Quiz
           </Button>
         </Box>
 
         {/* <Box minHeight="120px">
-          <Typography variant="h3">Recent tests</Typography>
-          {recentTests.length === 0 && (
+          <Typography variant="h3">Recent quizzes</Typography>
+          {recentQuizzes.length === 0 && (
             <Typography
               variant="body1"
               color="textSecondary"
               textAlign="center"
             >
-              Looks like there's no history yet. Try starting a test and saving
+              Looks like there's no history yet. Try starting a quiz and saving
               your results, then checking back later.
             </Typography>
           )}
         </Box> */}
 
         <Box>
-          <Typography variant="h3">Example tests</Typography>
+          <Typography variant="h3">Example quizzes</Typography>
           <Stack
             direction="row"
             gap="8px"
@@ -94,11 +94,11 @@ export default function Index() {
               elevation={2}
             >
               <CardActionArea
-                onClick={() => openNewTestModal(TEST_PRESETS.birds)}
+                onClick={() => openNewQuizModal(QUIZ_PRESETS.birds)}
               >
                 <CardMedia
                   component="img"
-                  src={TEST_PRESET_IMAGES.birds}
+                  src={QUIZ_PRESET_IMAGES.birds}
                   sx={{ width: "100%", height: "200px" }}
                 />
 
@@ -113,11 +113,11 @@ export default function Index() {
               elevation={2}
             >
               <CardActionArea
-                onClick={() => openNewTestModal(TEST_PRESETS.mammals)}
+                onClick={() => openNewQuizModal(QUIZ_PRESETS.mammals)}
               >
                 <CardMedia
                   component="img"
-                  src={TEST_PRESET_IMAGES.mammals}
+                  src={QUIZ_PRESET_IMAGES.mammals}
                   sx={{ width: "100%", height: "200px" }}
                 />
 
@@ -132,11 +132,11 @@ export default function Index() {
               elevation={2}
             >
               <CardActionArea
-                onClick={() => openNewTestModal(TEST_PRESETS.orchids)}
+                onClick={() => openNewQuizModal(QUIZ_PRESETS.orchids)}
               >
                 <CardMedia
                   component="img"
-                  src={TEST_PRESET_IMAGES.orchids}
+                  src={QUIZ_PRESET_IMAGES.orchids}
                   sx={{ width: "100%", height: "200px" }}
                 />
 
@@ -150,11 +150,11 @@ export default function Index() {
       </Stack>
 
       {/* Modals */}
-      <NewTestDialog
-        key={JSON.stringify(newTestModalProps)}
-        open={newTestModalOpen}
-        setOpen={setNewTestModalOpen}
-        initialValues={newTestModalProps}
+      <NewQuizDialog
+        key={JSON.stringify(newQuizModalProps)}
+        open={newQuizModalOpen}
+        setOpen={setNewQuizModalOpen}
+        initialValues={newQuizModalProps}
       />
     </GeneralPage>
   );

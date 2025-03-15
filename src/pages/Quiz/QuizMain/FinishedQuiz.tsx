@@ -15,15 +15,15 @@ import { CloseOutlined, RefreshOutlined } from "@mui/icons-material";
 import { Observation } from "src/services/inaturalist/Api";
 import taxonia from "src/images/taxonia2.png";
 
-import { TestAnswer } from "./types";
-import ResultRow from "./FinishedTest/ResultRow";
+import { QuizAnswer } from "./types";
+import ResultRow from "./FinishedQuiz/ResultRow";
 import { useNavigate } from "@tanstack/react-router";
 
-export default function FinishedTest({
+export default function FinishedQuiz({
   observations,
   answers,
-}: TestResultsProps) {
-  type Rating = ReturnType<typeof TestAnswer.scoreRating>;
+}: FinishedQuizProps) {
+  type Rating = ReturnType<typeof QuizAnswer.scoreRating>;
   const [filter, setFilter] = useState<Rating | null>(null);
 
   const averageScore =
@@ -96,14 +96,14 @@ export default function FinishedTest({
             if (filter === null) {
               return true;
             }
-            return TestAnswer.scoreRating(answer.score) === filter;
+            return QuizAnswer.scoreRating(answer.score) === filter;
           })}
       </Stack>
     </Box>
   );
 }
 
-type TestResultsProps = {
+type FinishedQuizProps = {
   observations: Observation[];
-  answers: TestAnswer[];
+  answers: QuizAnswer[];
 };

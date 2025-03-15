@@ -2,36 +2,36 @@ import { useState } from "react";
 import { CloseOutlined } from "@mui/icons-material";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 
-import { TestAnswer } from "./types";
-import TestQuestion from "./ActiveTest/TestQuestion";
-import ConfirmExitDialog from "./ActiveTest/ConfirmExitDialog";
-import AnswerDialog from "./ActiveTest/AnswerDialog";
+import { QuizAnswer } from "./types";
+import QuizQuestion from "./ActiveQuiz/QuizQuestion";
+import ConfirmExitDialog from "./ActiveQuiz/ConfirmExitDialog";
+import AnswerDialog from "./ActiveQuiz/AnswerDialog";
 
 import { Observation } from "src/services/inaturalist/Api";
 import taxonia from "src/images/taxonia2.png";
 import { useNavigate } from "@tanstack/react-router";
 
-export default function ActiveTest({
+export default function ActiveQuiz({
   currentObservation,
   commitAnswer,
   question,
   questionsLen,
-}: ActiveTestProps) {
-  const [submittedAnswer, setSubmittedAnswer] = useState<TestAnswer>(
-    TestAnswer.default()
+}: ActiveQuizProps) {
+  const [submittedAnswer, setSubmittedAnswer] = useState<QuizAnswer>(
+    QuizAnswer.default()
   );
   const [showAnswerDialog, setShowAnswerDialog] = useState(false);
   const [showExitDialog, setShowExitDialog] = useState(false);
 
   const submitAnswer = (input?: string) => {
-    const answer = TestAnswer.score(currentObservation, input);
+    const answer = QuizAnswer.score(currentObservation, input);
     setSubmittedAnswer(answer);
     setShowAnswerDialog(true);
   };
 
   const onAnswerDialogClose = () => {
     commitAnswer(submittedAnswer);
-    setSubmittedAnswer(TestAnswer.default());
+    setSubmittedAnswer(QuizAnswer.default());
     setShowAnswerDialog(false);
   };
 
@@ -76,7 +76,7 @@ export default function ActiveTest({
       </AppBar>
 
       <Box margin="20px">
-        <TestQuestion
+        <QuizQuestion
           key={currentObservation.id}
           observation={currentObservation}
           submitAnswer={submitAnswer}
@@ -98,9 +98,9 @@ export default function ActiveTest({
   );
 }
 
-type ActiveTestProps = {
+type ActiveQuizProps = {
   currentObservation: Observation;
   question: number;
   questionsLen: number;
-  commitAnswer: (answer: TestAnswer) => void;
+  commitAnswer: (answer: QuizAnswer) => void;
 };

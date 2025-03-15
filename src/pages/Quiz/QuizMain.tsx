@@ -1,25 +1,25 @@
 import { useState } from "react";
 
-import FinishedTest from "./TestMain/FinishedTest";
-import ActiveTest from "./TestMain/ActiveTest";
-import { TestAnswer } from "./TestMain/types";
+import FinishedQuiz from "./QuizMain/FinishedQuiz";
+import ActiveQuiz from "./QuizMain/ActiveQuiz";
+import { QuizAnswer } from "./QuizMain/types";
 
 import { ObservationsResponse } from "src/services/inaturalist/Api";
 
-export default function TestMain({ observations }: TestMainProps) {
+export default function QuizMain({ observations }: QuizMainProps) {
   const [observationsStable] = useState(observations);
   const [question, setQuestion] = useState(0);
-  const [answers, setAnswers] = useState<TestAnswer[]>([]);
+  const [answers, setAnswers] = useState<QuizAnswer[]>([]);
 
   const numQuestions = observationsStable.results.length;
 
-  const commitAnswer = (answer: TestAnswer) => {
+  const commitAnswer = (answer: QuizAnswer) => {
     setAnswers([...answers, answer]);
     setQuestion(question + 1);
   };
 
   return question < numQuestions ? (
-    <ActiveTest
+    <ActiveQuiz
       key={question}
       currentObservation={observationsStable.results[question]}
       commitAnswer={commitAnswer}
@@ -27,7 +27,7 @@ export default function TestMain({ observations }: TestMainProps) {
       questionsLen={observationsStable.results.length}
     />
   ) : (
-    <FinishedTest
+    <FinishedQuiz
       key={question}
       observations={observationsStable.results}
       answers={answers}
@@ -35,6 +35,6 @@ export default function TestMain({ observations }: TestMainProps) {
   );
 }
 
-type TestMainProps = {
+type QuizMainProps = {
   observations: ObservationsResponse;
 };

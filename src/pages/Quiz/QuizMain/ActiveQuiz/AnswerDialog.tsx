@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 import { Observation } from "src/services/inaturalist/Api";
 
-import { TestAnswer } from "../types";
+import { QuizAnswer } from "../types";
 
 export default function AnswerDialog({
   open,
@@ -51,6 +51,6 @@ export default function AnswerDialog({
 type AnswerDialogProps = {
   open: boolean;
   onClose: () => void;
-  answer: TestAnswer;
+  answer: QuizAnswer;
   observation: Observation;
 };

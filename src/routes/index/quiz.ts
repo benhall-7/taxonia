@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { createRoute } from "@tanstack/react-router";
-import Test from "src/pages/Test";
+import Quiz from "src/pages/Quiz";
 import { rootRoute } from "src/routes";
 
-const testSearchSchema = z.object({
+const quizSearchSchema = z.object({
   questionCount: z.number().catch(15),
   taxon: z.number().optional().catch(undefined),
   place: z.number().optional().catch(undefined),
@@ -14,9 +14,9 @@ const testSearchSchema = z.object({
   excludeDead: z.boolean().optional().catch(undefined),
 });
 
-export const testRoute = createRoute({
+export const quizRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/test",
-  component: Test,
-  validateSearch: testSearchSchema,
+  path: "/quiz",
+  component: Quiz,
+  validateSearch: quizSearchSchema,
 });

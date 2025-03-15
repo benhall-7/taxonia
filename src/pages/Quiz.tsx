@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Box, CircularProgress } from "@mui/material";
 
 import actions from "src/actions";
-import TestMain from "./Test/TestMain";
+import QuizMain from "./Quiz/QuizMain";
 import { useState } from "react";
 import { useSearch } from "@tanstack/react-router";
 import {
@@ -10,11 +10,11 @@ import {
   TERM_VALUE_ID_DEAD,
 } from "src/services/inaturalist/consts";
 
-export default function Test() {
+export default function Quiz() {
   // use timestamp to control react-query caching nonsense
-  const [testId] = useState(new Date());
+  const [quizId] = useState(new Date());
 
-  const search = useSearch({ from: "/test" });
+  const search = useSearch({ from: "/quiz" });
 
   const taxaParams: Parameters<typeof actions.getObservationsList.action>[0] = {
     rank: "species",
@@ -39,7 +39,7 @@ export default function Test() {
     ttl: "10",
   };
   const { data: observationsList, isLoading } = useQuery({
-    queryKey: [actions.getObservationsList.key, taxaParams, testId],
+    queryKey: [actions.getObservationsList.key, taxaParams, quizId],
     queryFn: ({ signal }) =>
       actions.getObservationsList.action(taxaParams, { signal }),
     refetchOnWindowFocus: false,
@@ -59,7 +59,7 @@ export default function Test() {
           <CircularProgress />
         </Box>
       )}
-      {observationsList && <TestMain observations={observationsList} />}
+      {observationsList && <QuizMain observations={observationsList} />}
     </>
   );
 }

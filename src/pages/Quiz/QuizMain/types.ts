@@ -1,13 +1,13 @@
 import { Observation } from "src/services/inaturalist/Api";
 import { normalizedLevenshtein } from "src/utils/levenshtein";
 
-export type TestAnswer = {
+export type QuizAnswer = {
   guess?: string;
   score: number;
 };
 
-export const TestAnswer = {
-  score(observation: Observation, guess?: string): TestAnswer {
+export const QuizAnswer = {
+  score(observation: Observation, guess?: string): QuizAnswer {
     const normalizedA = observation.taxon?.name?.trim().toLocaleLowerCase();
     const normalizedB = guess?.trim().toLocaleLowerCase();
 
@@ -49,7 +49,7 @@ export const TestAnswer = {
     }
     return "good";
   },
-  default(): TestAnswer {
+  default(): QuizAnswer {
     return {
       guess: undefined,
       score: 0,

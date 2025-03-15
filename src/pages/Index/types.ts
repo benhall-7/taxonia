@@ -5,7 +5,7 @@ import {
   User,
 } from "src/services/inaturalist/Api";
 
-export type NewTestForm = {
+export type NewQuizForm = {
   questionCount: number;
   taxon?: AutocompleteTaxon;
   place?: CorePlace;
@@ -19,7 +19,7 @@ export type NewTestForm = {
   excludeDead?: boolean;
 };
 
-export function newTestValidate(form: NewTestForm) {
+export function newQuizValidate(form: NewQuizForm) {
   // const numQuestionsValid =
   //   form.numQuestions >= 1 &&
   //   form.numQuestions <= 100;
