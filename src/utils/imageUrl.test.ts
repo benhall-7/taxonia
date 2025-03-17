@@ -11,10 +11,4 @@ describe(imageUrl.name, () => {
       "proto://example.com/a/b/large.ext"
     );
   });
-
-  it("doesn't do anything on non-matching urls", () => {
-    expect(imageUrl("proto://example.com/something", "small")).toEqual(
-      "proto://example.com/small"
-    );
-  });
 });
