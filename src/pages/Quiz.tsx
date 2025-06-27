@@ -11,12 +11,14 @@ import {
 } from "src/services/inaturalist/consts";
 
 export default function Quiz() {
-  // use timestamp to control react-query caching nonsense
+  // use timestamp to control react-query caching
   const [quizId] = useState(new Date());
 
   const search = useSearch({ from: "/quiz" });
 
-  const taxaParams: Parameters<typeof actions.getObservationsList.action>[0] = {
+  const observationsParams: Parameters<
+    typeof actions.getObservationsList.action
+  >[0] = {
     rank: "species",
     taxon_id: search.taxon ? [String(search.taxon)] : undefined,
     place_id: search.place ? [search.place] : undefined,
@@ -39,9 +41,9 @@ export default function Quiz() {
     ttl: "10",
   };
   const { data: observationsList, isLoading } = useQuery({
-    queryKey: [actions.getObservationsList.key, taxaParams, quizId],
+    queryKey: [actions.getObservationsList.key, observationsParams, quizId],
     queryFn: ({ signal }) =>
-      actions.getObservationsList.action(taxaParams, { signal }),
+      actions.getObservationsList.action(observationsParams, { signal }),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,

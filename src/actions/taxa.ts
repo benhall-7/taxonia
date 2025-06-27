@@ -5,3 +5,15 @@ export function getTaxaAutocompleteList(
 ) {
   return inaturalist.taxa.autocompleteList(...args).then((res) => res.data);
 }
+
+export function getTaxaList(
+  ...args: Parameters<typeof inaturalist.taxa.taxaList>
+) {
+  return inaturalist.taxa.taxaList(...args).then((res) => res.data);
+}
+
+export function getTaxaDetail(
+  ...args: Parameters<typeof inaturalist.taxa.taxaDetail>
+) {
+  return inaturalist.taxa.taxaDetail(...args).then((res) => res.data);
+}

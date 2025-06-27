@@ -1,12 +1,14 @@
 import { getObservationsList } from "./observations";
 import { getPlacesAutocompleteList } from "./places";
-import { getTaxaAutocompleteList } from "./taxa";
+import { getTaxaAutocompleteList, getTaxaDetail, getTaxaList } from "./taxa";
 import { getUsersAutocompleteList } from "./users";
 
 const actionsList = {
   getObservationsList,
   getPlacesAutocompleteList,
   getTaxaAutocompleteList,
+  getTaxaList,
+  getTaxaDetail,
   getUsersAutocompleteList,
 };
 
