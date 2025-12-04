@@ -1,7 +1,7 @@
 import { getObservationsList } from "./observations";
 import { getPlacesAutocompleteList } from "./places";
 import { getTaxaAutocompleteList, getTaxaDetail, getTaxaList } from "./taxa";
-import { getAuthMe } from "./user";
+import { getAuthLoginUrl, getAuthMe } from "./user";
 import { getUsersAutocompleteList } from "./users";
 
 const actionsList = {
@@ -12,6 +12,7 @@ const actionsList = {
   getTaxaDetail,
   getUsersAutocompleteList,
   getAuthMe,
+  getAuthLoginUrl,
 };
 
 type Entry<K, V> = { key: K; action: V };

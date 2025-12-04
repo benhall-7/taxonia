@@ -343,13 +343,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @name AuthMeList
+     * @name GetAuth
      * @summary Get current logged-in user
-     * @request GET:/auth/auth/me
+     * @request GET:/auth/me
      */
-    authMeList: (params: RequestParams = {}) =>
+    getAuth: (params: RequestParams = {}) =>
       this.request<MeResponse, any>({
-        path: `/auth/auth/me`,
+        path: `/auth/me`,
         method: "GET",
         format: "json",
         ...params,
