@@ -10,16 +10,10 @@ export default defineConfig({
     },
   },
   server: {
-    cors: {
-      origin: [
-        // default value
-        /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/,
-        // my allowlist
-        /https?:\/\/api\.inaturalist\.org/,
-      ],
-    },
+    port: Number(process.env.VITE_PORT),
   },
   define: {
     APP_VERSION: JSON.stringify(process.env.npm_package_version),
+    API_URL: JSON.stringify(process.env.API_URL),
   },
 });

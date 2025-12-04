@@ -2,26 +2,41 @@ import taxonia from "src/images/taxonia2.png";
 import {
   AppBar,
   Box,
-  // IconButton,
+  IconButton,
+  Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
-// import MenuIcon from "@mui/icons-material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import actions from "src/actions";
 
 export default function GeneralPage({ children }: Props) {
+  const { data, error } = useQuery({
+    queryKey: [actions.getAuthMe.key],
+    queryFn: ({ signal }) =>
+      actions.getAuthMe.action({ signal, credentials: "include" }),
+  });
+
+  console.log({ data, error });
+
   return (
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <img src={taxonia} width="64px" />
-          <Typography
-            variant="h2"
-            component="div"
-            sx={{ flexGrow: 1, marginLeft: "8px" }}
-          >
-            Taxonia
-          </Typography>
-          {/* <IconButton
+          <Box sx={{ flexGrow: 1, marginLeft: "8px" }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Stack direction="row" alignItems="center" gap="8px">
+                <img src={taxonia} width="64px" height="64px" />
+                <Typography variant="h2" component="div" color="textPrimary">
+                  Taxonia
+                </Typography>
+              </Stack>
+            </Link>
+          </Box>
+
+          <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -29,7 +44,7 @@ export default function GeneralPage({ children }: Props) {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton> */}
+          </IconButton>
         </Toolbar>
       </AppBar>
 
