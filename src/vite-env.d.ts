@@ -1,4 +1,14 @@
 /// <reference types="vite/client" />
 
-declare const APP_VERSION: string;
-declare const API_URL: string;
+interface ViteTypeOptions {
+  strictImportMetaEnv: unknown
+}
+
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
+

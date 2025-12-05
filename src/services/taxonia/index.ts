@@ -1,7 +1,7 @@
 import * as tax from "./Api";
 
 const taxonia = new tax.Api({
-  baseUrl: API_URL,
+  baseUrl: import.meta.env.VITE_API_URL,
   baseApiParams: { credentials: "include" },
 });
 

@@ -4,15 +4,14 @@
   "version": "0.4",
   "type": "module",
   "scripts": {
-    "dev": "dotenvx run -- vite",
-    "build": "dotenvx run --  tsc -b && vite build",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test": "dotenvx run --  vitest",
-    "preview": "dotenvx run --  vite preview"
+    "test": "vitest",
+    "preview": "vite preview"
   },
   "main": "src/main.tsx",
   "dependencies": {
-    "@dotenvx/dotenvx": "^1.51.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.5",

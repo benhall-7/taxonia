@@ -12,8 +12,4 @@ export default defineConfig({
   server: {
     port: Number(process.env.VITE_PORT),
   },
-  define: {
-    APP_VERSION: JSON.stringify(process.env.npm_package_version),
-    API_URL: JSON.stringify(process.env.API_URL),
-  },
 });
