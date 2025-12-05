@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import routes from "./routes/index";
 import { RouterProvider } from "@tanstack/react-router";
-import { amber, deepPurple, purple } from "@mui/material/colors";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1 } },
