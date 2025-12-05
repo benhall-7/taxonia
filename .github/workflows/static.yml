@@ -37,6 +37,11 @@ jobs:
           node-version-file: package.json
           check-latest: false
 
+      - name: Create .env for production build settings
+        run: |
+          echo "API_URL=https://api.taxonia.app" > .env
+          echo "VITE_PORT=5173" >> .env
+
       - run: npm ci
       - run: npm run lint
       - run: npm test
