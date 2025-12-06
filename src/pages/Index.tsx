@@ -8,10 +8,12 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  Container,
   Stack,
   Typography,
 } from "@mui/material";
 import { NewQuizForm } from "./Index/types";
+import RecentQuizzes from "./Index/RecentQuizzes";
 
 const QUIZ_PRESETS = {
   birds: {
@@ -50,9 +52,6 @@ export default function Index() {
   const [newQuizModalOpen, setNewQuizModalOpen] = useState(false);
   const [newQuizModalProps, setNewQuizModalProps] = useState<NewQuizForm>();
 
-  // TODO: implement an API for a user's 12(?) most recent quizzes
-  // const recentQuizzes = [];
-
   const openNewQuizModal = (initialValues?: NewQuizForm) => {
     setNewQuizModalProps(initialValues);
     setNewQuizModalOpen(true);
@@ -60,102 +59,111 @@ export default function Index() {
 
   return (
     <GeneralPage>
-      <Stack direction="column" spacing="20px">
-        <Box textAlign="center">
-          <Button variant="outlined" onClick={() => openNewQuizModal()}>
-            + New Quiz
-          </Button>
-        </Box>
-
-        {/* <Box minHeight="120px">
-          <Typography variant="h3">Recent quizzes</Typography>
-          {recentQuizzes.length === 0 && (
-            <Typography
-              variant="body1"
-              color="textSecondary"
-              textAlign="center"
+      <Container maxWidth="lg">
+        <Stack direction="column" spacing="20px">
+          <Box>
+            <Stack
+              direction="row"
+              justifyContent="start"
+              alignItems="center"
+              gap="16px"
             >
-              Looks like there's no history yet. Try starting a quiz and saving
-              your results, then checking back later.
-            </Typography>
-          )}
-        </Box> */}
+              <Typography variant="h4" mb="8px">
+                Previous Quizzes
+              </Typography>
+              <Button variant="outlined" onClick={() => openNewQuizModal()}>
+                + New Quiz
+              </Button>
+            </Stack>
 
-        <Box>
-          <Typography variant="h3">Example quizzes</Typography>
-          <Stack
-            direction="row"
-            gap="8px"
-            justifyContent="center"
-            flexWrap="wrap"
-          >
-            <Card
-              sx={{ minWidth: "400px", maxWidth: "600px", flex: "1 0 0" }}
-              elevation={2}
+            <Box minHeight="80px">
+              <RecentQuizzes />
+            </Box>
+          </Box>
+
+          <Stack direction="row" gap="20px" margin="20px" flexWrap="wrap">
+            <Stack
+              direction="column"
+              flex="2 0 0"
+              minWidth="300px"
+              justifyContent="start"
+              textAlign="right"
             >
-              <CardActionArea
-                onClick={() => openNewQuizModal(QUIZ_PRESETS.birds)}
-              >
-                <CardMedia
-                  component="img"
-                  src={QUIZ_PRESET_IMAGES.birds}
-                  sx={{ width: "100%", height: "200px" }}
-                />
+              <Typography variant="h4">A Taxonomy Practice Tool</Typography>
+              <Typography variant="body1">
+                Taxonia is a quiz-based taxonomy learning app (think: Homo
+                sapiens, Felis catus, etc). It utilizes iNaturalist to select
+                from real, verified observations for you to train your
+                memorization and identification skills.
+                <br />
+                <br />
+                You can use the test examples provided to try it out, or change
+                the parameters to test whatever categories you want.
+              </Typography>
+            </Stack>
 
-                <CardContent>
-                  <Typography>Birds of North America</Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <Box flex="1 0 0">
+              <Stack direction="column" gap="8px" justifyContent="center">
+                <Card sx={{ minWidth: "300px" }} elevation={2}>
+                  <CardActionArea
+                    onClick={() => openNewQuizModal(QUIZ_PRESETS.birds)}
+                  >
+                    <CardMedia
+                      component="img"
+                      src={QUIZ_PRESET_IMAGES.birds}
+                      sx={{ width: "100%", height: "100px" }}
+                    />
 
-            <Card
-              sx={{ minWidth: "400px", maxWidth: "600px", flex: "1 0 0" }}
-              elevation={2}
-            >
-              <CardActionArea
-                onClick={() => openNewQuizModal(QUIZ_PRESETS.mammals)}
-              >
-                <CardMedia
-                  component="img"
-                  src={QUIZ_PRESET_IMAGES.mammals}
-                  sx={{ width: "100%", height: "200px" }}
-                />
+                    <CardContent>
+                      <Typography>Birds of North America</Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
 
-                <CardContent>
-                  <Typography>Native Mammals of the United States</Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+                <Card sx={{ minWidth: "300px" }} elevation={2}>
+                  <CardActionArea
+                    onClick={() => openNewQuizModal(QUIZ_PRESETS.mammals)}
+                  >
+                    <CardMedia
+                      component="img"
+                      src={QUIZ_PRESET_IMAGES.mammals}
+                      sx={{ width: "100%", height: "100px" }}
+                    />
 
-            <Card
-              sx={{ minWidth: "400px", maxWidth: "600px", flex: "1 0 0" }}
-              elevation={2}
-            >
-              <CardActionArea
-                onClick={() => openNewQuizModal(QUIZ_PRESETS.orchids)}
-              >
-                <CardMedia
-                  component="img"
-                  src={QUIZ_PRESET_IMAGES.orchids}
-                  sx={{ width: "100%", height: "200px" }}
-                />
+                    <CardContent>
+                      <Typography>Mammals of the US</Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
 
-                <CardContent>
-                  <Typography>Native Orchids of Pennsylvania</Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+                <Card sx={{ minWidth: "300px" }} elevation={2}>
+                  <CardActionArea
+                    onClick={() => openNewQuizModal(QUIZ_PRESETS.orchids)}
+                  >
+                    <CardMedia
+                      component="img"
+                      src={QUIZ_PRESET_IMAGES.orchids}
+                      sx={{ width: "100%", height: "100px" }}
+                    />
+
+                    <CardContent>
+                      <Typography>Orchids of Pennsylvania</Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Stack>
+            </Box>
           </Stack>
-        </Box>
-      </Stack>
+        </Stack>
 
-      {/* Modals */}
-      <NewQuizDialog
-        key={JSON.stringify(newQuizModalProps)}
-        open={newQuizModalOpen}
-        setOpen={setNewQuizModalOpen}
-        initialValues={newQuizModalProps}
-      />
+        {/* Modals */}
+        <NewQuizDialog
+          key={JSON.stringify(newQuizModalProps)}
+          open={newQuizModalOpen}
+          setOpen={setNewQuizModalOpen}
+          initialValues={newQuizModalProps}
+        />
+      </Container>
     </GeneralPage>
   );
 }

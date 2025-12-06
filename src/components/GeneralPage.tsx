@@ -9,6 +9,7 @@ import {
   Stack,
   Toolbar,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
@@ -17,8 +18,10 @@ import InatIcon from "./GeneralPage/InatIcon";
 import useUser from "src/hooks/useUser";
 import LoginModal from "./GeneralPage/LoginModal";
 import ProfileModal from "./GeneralPage/ProfileModal";
+import KofiIcon from "./GeneralPage/KofiIcon";
 
 export default function GeneralPage({ children }: Props) {
+  const theme = useTheme();
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setMenuAnchor(event.currentTarget);
@@ -92,7 +95,10 @@ export default function GeneralPage({ children }: Props) {
         {children}
       </Box>
 
-      <Paper elevation={8} variant="outlined">
+      <Paper
+        elevation={8}
+        sx={{ backgroundColor: theme.palette.secondary.light }}
+      >
         <Stack
           direction="row"
           justifyContent="center"
@@ -114,6 +120,14 @@ export default function GeneralPage({ children }: Props) {
             style={{ backgroundColor: "white", border: "1px solid darkgray" }}
           >
             <InatIcon />
+          </IconButton>
+
+          <IconButton
+            href="https://ko-fi.com/benjaminjahall"
+            size="small"
+            style={{ backgroundColor: "white", border: "1px solid darkgray" }}
+          >
+            <KofiIcon />
           </IconButton>
         </Stack>
       </Paper>

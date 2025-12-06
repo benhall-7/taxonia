@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import {
+  Alert,
   AppBar,
   Box,
+  Button,
   ButtonGroup,
   IconButton,
   Stack,
@@ -10,16 +12,22 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { CloseOutlined, RefreshOutlined } from "@mui/icons-material";
+import {
+  AddCircle,
+  CloseOutlined,
+  RefreshOutlined,
+} from "@mui/icons-material";
 
 import { Observation } from "src/services/inaturalist/Api";
 import taxonia from "src/images/taxonia2.png";
 
 import { QuizAnswer } from "./types";
 import ResultRow from "./FinishedQuiz/ResultRow";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import { Trie } from "src/utils/trie";
 import { TaxonTree } from "./FinishedQuiz/TaxonTree";
+import { useMutation } from "@tanstack/react-query";
+import actions from "src/actions";
 
 export default function FinishedQuiz({
   observations,
@@ -30,6 +38,18 @@ export default function FinishedQuiz({
 
   const averageScore =
     answers.reduce((sum, answer) => sum + answer.score, 0) / answers.length;
+
+  const quizSearchParams = useSearch({ from: "/quiz" });
+  const postQuizParams: Parameters<typeof actions.postQuizResults.action>[0] = {
+    quiz_type: "species",
+    params: quizSearchParams,
+    question_count: quizSearchParams.questionCount,
+    score: averageScore,
+  };
+  const { mutate, isPending, isError, isSuccess } = useMutation({
+    mutationKey: [actions.postQuizResults.key],
+    mutationFn: () => actions.postQuizResults.action(postQuizParams),
+  });
 
   const filteredAnswers = useMemo(
     () =>
@@ -109,21 +129,39 @@ export default function FinishedQuiz({
 
       <Stack direction="row" flexWrap="wrap" gap="20px" margin="20px">
         <Stack direction="column" minWidth="500px" flexGrow="1">
-          <ToggleButtonGroup
-            value={filter}
-            onChange={(_, v) => setFilter(v)}
-            exclusive
-          >
-            <ToggleButton value={"good" satisfies Rating}>
-              <Typography>Correct</Typography>
-            </ToggleButton>
-            <ToggleButton value={"ok" satisfies Rating}>
-              <Typography>Partial</Typography>
-            </ToggleButton>
-            <ToggleButton value={"bad" satisfies Rating}>
-              <Typography>Incorrect</Typography>
-            </ToggleButton>
-          </ToggleButtonGroup>
+          <Stack direction="row" justifyContent="space-between">
+            <ToggleButtonGroup
+              value={filter}
+              onChange={(_, v) => setFilter(v)}
+              exclusive
+            >
+              <ToggleButton value={"good" satisfies Rating}>
+                <Typography>Correct</Typography>
+              </ToggleButton>
+              <ToggleButton value={"ok" satisfies Rating}>
+                <Typography>Partial</Typography>
+              </ToggleButton>
+              <ToggleButton value={"bad" satisfies Rating}>
+                <Typography>Incorrect</Typography>
+              </ToggleButton>
+            </ToggleButtonGroup>
+            <Stack direction="row" justifyContent="end" gap="8px">
+              {isSuccess && <Alert severity="success">Success!</Alert>}
+              {isError && (
+                <Alert severity="error">Error saving quiz results!</Alert>
+              )}
+              <Button
+                aria-label="save"
+                onClick={() => mutate()}
+                disabled={isPending || isSuccess}
+                startIcon={<AddCircle />}
+                variant="outlined"
+                size="small"
+              >
+                Save results
+              </Button>
+            </Stack>
+          </Stack>
           {filteredAnswers.map(({ answer, observation, questionNum }) => (
             <ResultRow
               key={questionNum}

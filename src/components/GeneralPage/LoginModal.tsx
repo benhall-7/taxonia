@@ -6,6 +6,7 @@ export default function LoginModal({ open, setOpen }: LoginModalProps) {
   const { data: loginUrl, error: loginUrlError } = useQuery({
     queryKey: [actions.getAuthLoginUrl],
     queryFn: actions.getAuthLoginUrl.action,
+    enabled: open,
   });
 
   return (

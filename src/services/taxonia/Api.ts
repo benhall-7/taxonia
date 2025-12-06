@@ -125,7 +125,7 @@ export enum ContentType {
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public baseUrl: string = "0.0.0.0:8080/api";
+  public baseUrl: string = "0.0.0.0:8080";
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
@@ -292,7 +292,7 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title Taxonia API
  * @version 1.0
- * @baseUrl 0.0.0.0:8080/api
+ * @baseUrl 0.0.0.0:8080
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   healthCheck = {
@@ -333,10 +333,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary iNaturalist OAuth callback
      * @request GET:/auth/callback
      */
-    callbackList: (params: RequestParams = {}) =>
+    callbackList: (
+      query: {
+        code: string;
+        state: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, any>({
         path: `/auth/callback`,
         method: "GET",
+        query: query,
         ...params,
       }),
 
@@ -379,10 +386,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List recent quiz results for the current user
      * @request GET:/quiz/results
      */
-    resultsList: (params: RequestParams = {}) =>
+    resultsList: (
+      query?: {
+        /**
+         * @format int64
+         * @default 20
+         */
+        limit?: number;
+        /**
+         * @format int64
+         * @default 0
+         */
+        offset?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<ListQuizResultsResponse, any>({
         path: `/quiz/results`,
         method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
